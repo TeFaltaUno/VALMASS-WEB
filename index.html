@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valmass · Café de Especialidad · Tucumán</title>
+<meta name="description" content="Valmass Café de Especialidad. Espresso, filtrados, ICE latte y cocina casera en Balcarce 510, San Miguel de Tucumán.">
+<meta name="theme-color" content="#120c08">
+<meta property="og:title" content="Valmass · Café de Especialidad">
+<meta property="og:description" content="Balcarce 510, San Miguel de Tucumán. Lunes a sábado de 7:30 a 13:00 y de 16:30 a 21:30.">
+<meta property="og:image" content="assets/img/taza-amarilla-rosetta.webp">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Outfit:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/seq/latte/001.webp">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+
+<!-- ============ ENTRADA ============ -->
+<div id="gate" aria-live="polite">
+  <div class="gate-inner">
+    <p class="mono gate-top"><span>Café de especialidad</span><span>San Miguel de Tucumán</span></p>
+    <h1 class="wordmark gate-mark" aria-label="valmass">
+      <span>v</span><span>a</span><span>l</span><span>m</span><span>a</span><span>s</span><span>s</span>
+    </h1>
+    <div class="gate-load"><div class="gate-bar"><i></i></div><span class="mono gate-pct">0%</span></div>
+    <div class="gate-actions">
+      <button class="btn btn-yellow" id="enter" disabled><span>Entrar</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button class="mono gate-mute" id="enter-mute" disabled>entrar sin sonido</button>
+    </div>
+  </div>
+  <div class="gate-curtain"></div>
+</div>
+
+<div id="cursor" aria-hidden="true"><i></i><span></span></div>
+<div class="grain" aria-hidden="true"></div>
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<!-- ============ HEADER ============ -->
+<header id="top">
+  <a href="#hero" class="wordmark logo" aria-label="Valmass, inicio">valmass</a>
+  <nav class="nav">
+    <a href="#arte">El café</a>
+    <a href="#origenes">Orígenes</a>
+    <a href="#carta">Carta</a>
+    <a href="#lugar">El lugar</a>
+    <a href="#visita">Visitanos</a>
+  </nav>
+  <div class="head-right">
+    <button id="sound" class="sound" aria-label="Música" aria-pressed="false"><i></i><i></i><i></i><i></i></button>
+    <a href="#visita" class="btn btn-small btn-yellow magnetic"><span>Cómo llegar</span></a>
+    <button id="menu-btn" class="menu-btn" aria-label="Menú" aria-expanded="false"><i></i><i></i></button>
+  </div>
+</header>
+<div id="menu" aria-hidden="true">
+  <a href="#arte" data-i="0">El café</a>
+  <a href="#origenes" data-i="1">Orígenes</a>
+  <a href="#carta" data-i="2">Carta</a>
+  <a href="#lugar" data-i="3">El lugar</a>
+  <a href="#visita" data-i="4">Visitanos</a>
+  <p class="mono">Balcarce 510 · SMT<br>Lun a Sáb · 7:30–13:00 · 16:30–21:30</p>
+</div>
+
+<main>
+
+<!-- ============ HERO (granos 3D) ============ -->
+<section id="hero" class="pin" style="--h:320vh">
+  <div class="sticky">
+    <div class="hero-ghost" aria-hidden="true">
+      <span class="ghost-row r1">GRANO · GRANO · GRANO · GRANO · GRANO · GRANO ·</span>
+      <span class="ghost-row r2">TUCUMÁN · TUCUMÁN · TUCUMÁN · TUCUMÁN ·</span>
+    </div>
+    <h2 class="hero-title" aria-label="Despertá el grano">
+      <span class="ht-line l1" data-split>Despertá</span>
+      <span class="ht-line l2"><em data-split>el</em> <span data-split>grano.</span></span>
+    </h2>
+    <div class="hero-meta">
+      <p class="mono kicker"><b>Sección 00</b> — Valmass</p>
+      <p class="lead" data-split-words>Café de especialidad, preparado con pasión, en el corazón de San Miguel de Tucumán.</p>
+      <div class="hero-cta">
+        <a href="#carta" class="btn btn-yellow magnetic"><span>Ver la carta</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#visita" class="btn btn-ghost magnetic"><span>Balcarce 510</span></a>
+      </div>
+    </div>
+    <div class="scroll-hint mono"><span>Bajá</span><i></i></div>
+    <div class="hero-fade"></div>
+  </div>
+</section>
+
+<!-- ============ MARQUESINA ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track" data-speed="1">
+    <span>Espresso</span><b>✦</b><span>Cortado</span><b>✦</b><span>Filtrado V60</span><b>✦</b><span>Capuccino</span><b>✦</b><span>ICE Latte</span><b>✦</b><span>Latte</span><b>✦</b><span>Café en grano</span><b>✦</b><span>Postres caseros</span><b>✦</b>
+  </div>
+</div>
+
+<!-- ============ 01 EL ARTE (latte art) ============ -->
+<section id="arte" class="pin seq-section" style="--h:420vh" data-seq="latte" data-frames="79">
+  <div class="sticky">
+    <canvas class="seq-bg"></canvas>
+    <div class="seq-title big-title" aria-hidden="true"><span class="bt-a">Oro en</span><span class="bt-b">cada taza.</span></div>
+    <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
+    <div class="seq-copy left">
+      <p class="mono kicker"><b>Sección 01</b> — El arte</p>
+      <h2 class="h2" data-split-words>Oro en cada taza.</h2>
+      <p class="body" data-split-words>Leche sedosa, pulso firme y una rosetta que ya es firma de la casa. Servida en la taza amarilla de siempre.</p>
+    </div>
+    <ol class="seq-steps mono">
+      <li data-at="0">La leche, sedosa</li>
+      <li data-at=".3">El vertido, a pulso</li>
+      <li data-at=".6">La rosetta</li>
+      <li data-at=".85">Tu taza, lista</li>
+    </ol>
+    <div class="seq-count mono"><span class="c-now">001</span> / <span>079</span></div>
+  </div>
+</section>
+
+<!-- ============ 02 LA EXTRACCIÓN ============ -->
+<section id="extraccion" class="pin seq-section dark" style="--h:420vh" data-seq="espresso" data-frames="90">
+  <div class="sticky">
+    <canvas class="seq-bg"></canvas>
+    <div class="seq-title big-title outline" aria-hidden="true"><span class="bt-a">La</span><span class="bt-b">extracción</span></div>
+    <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
+    <div class="seq-copy right">
+      <p class="mono kicker"><b>Sección 02</b> — La extracción</p>
+      <h2 class="h2" data-split-words>Del molino a la taza.</h2>
+      <p class="body" data-split-words>Cada espresso pasa por las manos de nuestras baristas: molienda, distribución, tampeo y una extracción precisa.</p>
+    </div>
+    <div class="timeline mono">
+      <div class="tl-bar"><i></i></div>
+      <ul><li data-at="0">Molienda</li><li data-at=".33">Distribución</li><li data-at=".45">Tampeo</li><li data-at=".66">Extracción</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 ORÍGENES ============ -->
+<section id="origenes" class="origins">
+  <div class="org-head">
+    <p class="mono kicker"><b>Sección 03</b> — Orígenes</p>
+    <h2 class="display" data-split>Dos orígenes,</h2>
+    <h2 class="display it" data-split>dos experiencias.</h2>
+    <p class="body narrow" data-split-words>Cada café tiene su propia personalidad, aromas y sabores. Descubrí la diversidad del café con nuestros orígenes disponibles.</p>
+  </div>
+  <div class="org-cards">
+    <article class="org-card tilt" style="--acc:#2f9a57">
+      <div class="oc-img"><img src="assets/img/granos-frasco.webp" alt="Granos de café de especialidad en frasco de vidrio" loading="lazy"></div>
+      <p class="mono oc-num">01 · Brasil</p>
+      <h3 class="oc-name">Paraíso</h3>
+      <p class="oc-txt">Origen Brasil. Para tu espresso de todos los días o para llevar a casa.</p>
+      <span class="oc-flag" aria-hidden="true"></span>
+    </article>
+    <article class="org-card tilt" style="--acc:#f2b51d">
+      <div class="oc-img"><img src="assets/img/molienda.webp" alt="Café recién molido cayendo en el portafiltro" loading="lazy"></div>
+      <p class="mono oc-num">02 · Colombia</p>
+      <h3 class="oc-name">Palmera</h3>
+      <p class="oc-txt">Origen Colombia. Preguntale a tu barista cómo prepararlo.</p>
+      <span class="oc-flag" aria-hidden="true"></span>
+    </article>
+  </div>
+  <div class="org-bag">
+    <div class="ob-photo reveal-clip"><img src="assets/img/bolsas-cafe.webp" alt="Bolsas de café en grano en la barra de Valmass" loading="lazy"></div>
+    <div class="ob-copy">
+      <div class="drawing" data-svg="assets/svg/bolsa.svg" aria-hidden="true"></div>
+      <h3 class="h3" data-split-words>Llevate Valmass a casa.</h3>
+      <p class="body" data-split-words>Tenemos café en grano para que prepares tu café de especialidad donde quieras.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 FILTRADO ============ -->
+<section id="filtrado" class="pin seq-section light" style="--h:460vh" data-seq="filtro" data-frames="104">
+  <div class="sticky">
+    <div class="drawing filtro-draw" data-svg="assets/svg/v60.svg" aria-hidden="true"></div>
+    <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
+    <div class="seq-copy left">
+      <p class="mono kicker"><b>Sección 04</b> — Filtrado</p>
+      <h2 class="h2" data-split-words>También, filtrado.</h2>
+      <p class="body" data-split-words>Cada taza la preparan nuestras baristas, capacitadas y apasionadas por el café de especialidad, buscando una extracción precisa.</p>
+    </div>
+    <ol class="filter-steps">
+      <li data-at="0"><span class="mono">01</span>Molienda al filtro</li>
+      <li data-at=".22"><span class="mono">02</span>Agua en círculos</li>
+      <li data-at=".45"><span class="mono">03</span>La jarra</li>
+      <li data-at=".7"><span class="mono">04</span>A la copa</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 05 ICE LATTE ============ -->
+<section id="ice" class="pin seq-section ice" style="--h:420vh" data-seq="ice" data-frames="86">
+  <div class="sticky">
+    <canvas class="seq-bg"></canvas>
+    <div class="seq-title big-title" aria-hidden="true"><span class="bt-a">Ice</span><span class="bt-b">latte.</span></div>
+    <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
+    <div class="seq-copy right">
+      <p class="mono kicker"><b>Sección 05</b> — Refrescate</p>
+      <h2 class="h2" data-split-words>Capuccino ICE Latte.</h2>
+      <p class="body" data-split-words>Espresso, leche fría y hielo. El sabor del capuccino clásico para los días de calor en Tucumán.</p>
+    </div>
+    <div class="ice-flakes" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============ HECHO A MANO ============ -->
+<section class="handmade">
+  <div class="drawing hm-draw" data-svg="assets/svg/taza.svg" aria-hidden="true"></div>
+  <blockquote>
+    <p class="quote" data-split-words>“Vení, sentite como en casa y descubrí por qué Valmass es tu lugar favorito.”</p>
+    <cite class="mono">— Valmass Café de Especialidad</cite>
+  </blockquote>
+</section>
+
+<!-- ============ CARTA ============ -->
+<section id="carta" class="menu-sec">
+  <div class="menu-head">
+    <p class="mono kicker"><b>Sección 06</b> — La carta</p>
+    <h2 class="display" data-split>La carta.</h2>
+    <div class="menu-tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="cafe">Café</button>
+      <button role="tab" aria-selected="false" data-tab="comer">Para acompañar</button>
+    </div>
+  </div>
+  <div class="menu-list" data-panel="cafe">
+    <a class="mi" data-img="assets/img/espresso-platito.webp"><span class="mi-n mono">01</span><span class="mi-name">Espresso</span><span class="mi-d">Corto, intenso, en taza amarilla</span><img src="assets/img/espresso-platito.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/cortado-medialunas.webp"><span class="mi-n mono">02</span><span class="mi-name">Cortado</span><span class="mi-d">En vaso, con su latte art</span><img src="assets/img/cortado-medialunas.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/taza-amarilla-rosetta.webp"><span class="mi-n mono">03</span><span class="mi-name">Latte</span><span class="mi-d">Leche sedosa y rosetta</span><img src="assets/img/taza-amarilla-rosetta.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/taza-menta-rosetta.webp"><span class="mi-n mono">04</span><span class="mi-name">Capuccino</span><span class="mi-d">El clásico de la casa</span><img src="assets/img/taza-menta-rosetta.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/filtro-copas.webp"><span class="mi-n mono">05</span><span class="mi-name">Filtrado</span><span class="mi-d">Preparado por nuestras baristas</span><img src="assets/img/filtro-copas.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/ice-latte.webp"><span class="mi-n mono">06</span><span class="mi-name">Capuccino ICE Latte</span><span class="mi-d">Espresso, leche fría y hielo</span><img src="assets/img/ice-latte.webp" alt="" loading="lazy"></a>
+  </div>
+  <div class="menu-list" data-panel="comer" hidden>
+    <a class="mi" data-img="assets/img/croissant.webp"><span class="mi-n mono">01</span><span class="mi-name">Croissant de jamón y queso</span><span class="mi-d">Hojaldrado, para el café de la mañana</span><img src="assets/img/croissant.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/tostado.webp"><span class="mi-n mono">02</span><span class="mi-name">Tostado</span><span class="mi-d">Jamón y queso, bien caliente</span><img src="assets/img/tostado.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/tostadas-latte.webp"><span class="mi-n mono">03</span><span class="mi-name">Tostadas</span><span class="mi-d">Con mermelada, para la mañana</span><img src="assets/img/tostadas-latte.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/avocado-toast.webp"><span class="mi-n mono">04</span><span class="mi-name">Avocado toast</span><span class="mi-d">Palta, huevo y pan tostado</span><img src="assets/img/avocado-toast.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/tostada-frutos-rojos.webp"><span class="mi-n mono">05</span><span class="mi-name">Tostada con frutos rojos</span><span class="mi-d">Dulce y fresca</span><img src="assets/img/tostada-frutos-rojos.webp" alt="" loading="lazy"></a>
+    <a class="mi" data-img="assets/img/cookies.webp"><span class="mi-n mono">06</span><span class="mi-name">Cookies y postres caseros</span><span class="mi-d">Para hacerle frente al lunes</span><img src="assets/img/cookies.webp" alt="" loading="lazy"></a>
+  </div>
+  <p class="mono menu-note">Carta completa y precios en el local.</p>
+  <div class="menu-float" aria-hidden="true"><img alt=""></div>
+</section>
+
+<!-- ============ EL LUGAR ============ -->
+<section id="lugar" class="pin hscroll" style="--h:420vh">
+  <div class="sticky">
+    <div class="hs-head">
+      <p class="mono kicker"><b>Sección 07</b> — El lugar</p>
+      <h2 class="display" data-split>Redescubrí Valmass.</h2>
+    </div>
+    <div class="hs-track">
+      <figure class="hs-item tall"><div class="hs-img"><img src="assets/img/escalera-plantas.webp" alt="Escalera de madera con plantas colgantes" loading="lazy"></div><figcaption class="mono">La escalera</figcaption></figure>
+      <figure class="hs-item"><div class="hs-img"><img src="assets/img/mesas-ventanal.webp" alt="Mesas junto al ventanal" loading="lazy"></div><figcaption class="mono">El ventanal</figcaption></figure>
+      <figure class="hs-item tall"><div class="hs-img"><img src="assets/img/fachada-calle.webp" alt="Cartel de Valmass en la fachada" loading="lazy"></div><figcaption class="mono">Balcarce 510</figcaption></figure>
+      <figure class="hs-item"><div class="hs-img"><img src="assets/img/maquina.webp" alt="Barista texturizando leche en la máquina de espresso" loading="lazy"></div><figcaption class="mono">La barra</figcaption></figure>
+      <figure class="hs-item tall"><div class="hs-img"><img src="assets/img/mesa-escalera.webp" alt="Salón con mesas y plantas" loading="lazy"></div><figcaption class="mono">Una tarde cualquiera</figcaption></figure>
+      <figure class="hs-item"><div class="hs-img"><img src="assets/img/alfombra.webp" alt="Alfombra de entrada con el logo de Valmass" loading="lazy"></div><figcaption class="mono">Bienvenidos</figcaption></figure>
+      <figure class="hs-item tall"><div class="hs-img"><img src="assets/img/cartel-especialidad.webp" alt="Cartel Café de Especialidad sobre el vidrio" loading="lazy"></div><figcaption class="mono">Café de especialidad</figcaption></figure>
+      <div class="hs-end"><p class="h3" data-split-words>Decoración renovada para que cada momento sea aún más especial.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEO QUE SE EXPANDE ============ -->
+<section id="video" class="pin vexp" style="--h:260vh">
+  <div class="sticky">
+    <div class="vexp-text" aria-hidden="true"><span>Las tardes</span><span class="it">en Valmass</span><span>son magia.</span></div>
+    <div class="vexp-box">
+      <video class="vexp-video" src="assets/video/tardes-valmass.mp4" poster="assets/video/tardes-valmass-poster.webp" muted loop playsinline preload="none"></video>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISITA ============ -->
+<section id="visita" class="visit">
+  <div class="visit-grid">
+    <div class="visit-copy">
+      <p class="mono kicker"><b>Sección 08</b> — Visitanos</p>
+      <h2 class="display" data-split>Nos vemos</h2>
+      <h2 class="display it yellow" data-split>en Valmass.</h2>
+      <dl class="visit-data">
+        <div><dt class="mono">Dirección</dt><dd>Balcarce 510<br>San Miguel de Tucumán</dd></div>
+        <div><dt class="mono">Horarios</dt><dd>Lunes a sábado<br>7:30 a 13:00 · 16:30 a 21:30</dd></div>
+      </dl>
+      <div class="visit-cta">
+        <a class="btn btn-yellow magnetic" href="https://www.google.com/maps/search/?api=1&query=Valmass+Caf%C3%A9+Balcarce+510+San+Miguel+de+Tucum%C3%A1n" target="_blank" rel="noopener"><span>Cómo llegar</span><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <a class="btn btn-ghost magnetic" href="https://www.instagram.com/valmass.cafe/" target="_blank" rel="noopener"><span>@valmass.cafe</span></a>
+      </div>
+    </div>
+    <div class="visit-media">
+      <div class="vm-photo reveal-clip"><img src="assets/img/fachada-entrada.webp" alt="Entrada de Valmass Café sobre calle Balcarce" loading="lazy"></div>
+      <div class="vm-map"><iframe title="Mapa: Balcarce 510, San Miguel de Tucumán" src="https://www.google.com/maps?q=Balcarce+510,+San+Miguel+de+Tucum%C3%A1n,+Tucum%C3%A1n&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-mark wordmark" aria-hidden="true"><span>v</span><span>a</span><span>l</span><span>m</span><span>a</span><span>s</span><span>s</span></div>
+  <div class="foot-row mono">
+    <span>Valmass · Café de Especialidad</span>
+    <span>Balcarce 510 · San Miguel de Tucumán</span>
+    <a href="https://www.instagram.com/valmass.cafe/" target="_blank" rel="noopener">Instagram</a>
+    <span>Web por Enzo Valenzuela Massa</span>
+  </div>
+</footer>
+
+<script src="script.js?v=1"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
+<script type="module" src="beans.js?v=1"></script>
+</body>
+</html>
