@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Outfit:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/seq/latte/001.webp">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="preload" as="image" href="assets/seq/cine-granos/001.webp">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -43,7 +43,7 @@
 <header id="top">
   <a href="#hero" class="logo sign" aria-label="Valmass, inicio"><span class="wordmark">valmass</span><small>café de especialidad</small></a>
   <nav class="nav">
-    <a href="#lab">La gota</a>
+    <a href="#lab">El café</a>
     <a href="#cafes">Cafés</a>
     <a href="#tes">Tés</a>
     <a href="#carta">Carta</a>
@@ -57,7 +57,7 @@
   </div>
 </header>
 <div id="menu" aria-hidden="true">
-  <a href="#lab" data-i="0">La gota</a>
+  <a href="#lab" data-i="0">El café</a>
   <a href="#cafes" data-i="1">Cafés</a>
   <a href="#tes" data-i="2">Tés</a>
   <a href="#carta" data-i="3">Carta</a>
@@ -100,33 +100,33 @@
 </div>
 
 
-<!-- ============ LABORATORIO 3D: gota, espresso, filtrado, latte art ============ -->
-<section id="lab" class="pin lab" style="--h:880vh" data-chap="0">
+<!-- ============ CINE: videos de café manejados por el scroll ============ -->
+<section id="lab" class="pin lab" style="--h:640vh" data-chap="0">
   <div class="sticky">
     <canvas class="lab-canvas" aria-hidden="true"></canvas>
     <div class="lab-vignette"></div>
     <div class="lab-fade"></div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>01</b> — La gota</p>
+      <p class="mono kicker"><b>01</b> — El grano</p>
+      <h2 class="lab-h">Todo empieza<br><em>en el grano.</em></h2>
+      <p class="body">Café de especialidad, seleccionado y tostado para que cada taza tenga su carácter.</p>
+    </div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>02</b> — La gota</p>
       <h2 class="lab-h">Oro en<br><em>cada gota.</em></h2>
-      <p class="body">Así cae el espresso del portafiltro: denso, dorado, con crema. Todo lo que pasa en la taza empieza en una gota.</p>
+      <p class="body">El espresso cae del portafiltro denso, dorado y con su crema.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>02</b> — Espresso</p>
-      <h2 class="lab-h">Desde el<br><em>portafiltro.</em></h2>
-      <p class="body">Traba, presión y extracción. Dos hilos de café que llenan el vaso con su crema.</p>
+      <p class="mono kicker"><b>03</b> — La extracción</p>
+      <h2 class="lab-h">Hilo<br><em>a hilo.</em></h2>
+      <p class="body">Presión, temperatura y tiempo: la extracción llena el vaso de cuerpo y crema.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>03</b> — Filtrado</p>
-      <h2 class="lab-h">Gota<br><em>a gota.</em></h2>
-      <p class="body">Agua en espiral sobre el V60, la cama de café respira y el filtrado cae limpio en la jarra.</p>
+      <p class="mono kicker"><b>04</b> — Con leche</p>
+      <h2 class="lab-h">Leche<br><em>y espresso.</em></h2>
+      <p class="body">Cuando la leche se encuentra con el café nacen el latte, el capuccino y el ICE latte.</p>
     </div>
-    <div class="lab-chap">
-      <p class="mono kicker"><b>04</b> — Latte art</p>
-      <h2 class="lab-h">La firma<br><em>de la casa.</em></h2>
-      <p class="body">Leche sedosa sobre el espresso: base, hojas, corazón y un último trazo. La rosetta en la taza amarilla.</p>
-    </div>
-    <div class="lab-dots mono" aria-hidden="true"><i>La gota</i><i>Espresso</i><i>Filtrado</i><i>Latte art</i></div>
+    <div class="lab-dots mono" aria-hidden="true"><i>El grano</i><i>La gota</i><i>Extracción</i><i>Con leche</i></div>
     <div class="lab-bar"><i></i></div>
     <div class="sign sign-badge" aria-hidden="true"><span class="wordmark">valmass</span><small>café de especialidad</small></div>
   </div>
@@ -397,10 +397,9 @@
   </div>
 </footer>
 
-<script src="data.js?v=2"></script>
-<script src="script.js?v=2"></script>
+<script src="data.js?v=3"></script>
+<script src="script.js?v=3"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
-<script type="module" src="beans.js?v=2"></script>
-<script type="module" src="brew.js?v=2"></script>
+<script type="module" src="beans.js?v=3"></script>
 </body>
 </html>

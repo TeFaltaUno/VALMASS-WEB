@@ -514,3 +514,25 @@ header.solid{background:linear-gradient(rgba(18,12,8,.85),rgba(18,12,8,0))}
   .tea-stage{width:min(88vw,420px);margin:0 auto}
   .sign .wordmark{font-size:22px}
 }
+
+/* ---------- V3: cine con videos reales + legibilidad ---------- */
+.lab-vignette{background:linear-gradient(90deg,rgba(8,5,3,.82) 0%,rgba(8,5,3,.55) 32%,rgba(8,5,3,0) 62%),linear-gradient(0deg,rgba(8,5,3,.7) 0%,rgba(8,5,3,0) 35%),radial-gradient(120% 90% at 50% 50%,transparent 50%,rgba(0,0,0,.55))}
+.lab-chap .kicker{opacity:1}
+.lab-chap .body{opacity:1;color:#fff}
+.lab-dots{text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.lab-dots i{opacity:.6}
+.seq-section .sticky::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(8,5,3,.55),transparent 35%,transparent 65%,rgba(8,5,3,.55))}
+.light .sticky::before{background:none}
+.seq-steps,.seq-count,.timeline{text-shadow:0 1px 12px rgba(0,0,0,.9)}
+.seq-steps li,.timeline li{opacity:.55}
+.tea-bg{background:radial-gradient(70% 70% at 55% 55%,color-mix(in srgb,var(--t) 55%,#000),color-mix(in srgb,var(--t) 18%,#0b0806) 75%)}
+.teas .body,.ti-con{text-shadow:0 1px 14px rgba(0,0,0,.35)}
+@media (max-width:900px){
+  .lab-vignette{background:linear-gradient(180deg,rgba(8,5,3,.88) 0%,rgba(8,5,3,.6) 34%,rgba(8,5,3,0) 58%),linear-gradient(0deg,rgba(8,5,3,.7) 0%,rgba(8,5,3,0) 22%)}
+  .seq-section .sticky::before{background:linear-gradient(180deg,rgba(8,5,3,.75) 0%,rgba(8,5,3,.15) 40%,transparent 55%)}
+  .light .sticky::before{background:linear-gradient(180deg,rgba(8,5,3,.6),transparent 35%)}
+  .big-title{z-index:4}
+  .seq-copy{z-index:5}
+  .seq-steps,.seq-count,.timeline,.filter-steps{z-index:5}
+  .hero-meta .lead{text-shadow:0 2px 16px rgba(0,0,0,.8)}
+}

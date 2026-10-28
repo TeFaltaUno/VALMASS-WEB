@@ -208,6 +208,56 @@
   const seqs = $$('.seq-section').map(s => new Sequence(s));
   const seqBy = n => seqs.find(s => s.name === n);
 
+
+  /* =========================================================
+     CINE (sección #lab): 4 videos de café manejados por el scroll
+     ========================================================= */
+  const Lab = (() => {
+    const sec = $('#lab'); if (!sec) return null;
+    const cv = $('.lab-canvas', sec), cx = cv.getContext('2d');
+    const chaps = $$('.lab-chap', sec), dots = $$('.lab-dots i', sec), fade = $('.lab-fade', sec), barI = $('.lab-bar i', sec);
+    const defs = [['cine-granos', 92], ['cine-porta', 98], ['cine-gota', 110], ['cine-leche', 108]];
+    const S = defs.map(([name, n]) => ({ name, n, frames: new Array(n), started: false, full: null }));
+    function load(s, stride = 1, onP) {
+      if (stride === 1 && s.full) return s.full;
+      const order = []; for (const st of [8, 4, 2, 1]) for (let i = 0; i < s.n; i += st) if (!order.includes(i)) order.push(i);
+      const want = order.filter(i => stride === 1 || i % stride === 0);
+      let k = 0, done = 0, active = 0;
+      const pr = new Promise(res => {
+        const next = () => {
+          if (k >= want.length) { if (!active) res(); return; }
+          const i = want[k++]; if (s.frames[i]) { done++; next(); return; }
+          active++; const img = new Image(); img.decoding = 'async';
+          img.onload = img.onerror = () => { if (img.naturalWidth) s.frames[i] = img; active--; done++; onP && onP(done / want.length); last = -1; next(); if (k >= want.length && !active) res(); };
+          img.src = `assets/seq/${s.name}/${String(i + 1).padStart(3, '0')}.webp`;
+        };
+        for (let c = 0; c < 6; c++) next();
+      });
+      if (stride === 1) s.full = pr;
+      return pr;
+    }
+    function size() { const r = dpr(); cv.width = Math.round(cv.clientWidth * r) || 1; cv.height = Math.round(cv.clientHeight * r) || 1; last = -1; }
+    let last = -1, cur = -1;
+    function draw(ci, t) {
+      const s = S[ci], i = Math.round(clamp(t) * (s.n - 1)), key = ci * 1000 + i + Math.round(t * 200) / 1000;
+      if (key === last) return; last = key;
+      let img = null; for (let d = 0; d < s.n && !img; d++) img = s.frames[i - d] || s.frames[i + d];
+      if (!img) return;
+      const z = 1.04 + t * .08, iw = img.naturalWidth, ih = img.naturalHeight;
+      const sc = Math.max(cv.width / iw, cv.height / ih) * z, w = iw * sc, h = ih * sc;
+      cx.drawImage(img, (cv.width - w) / 2, (cv.height - h) / 2, w, h);
+    }
+    function frameAt(p) {
+      const n = S.length, ci = Math.min(n - 1, Math.floor(p * n)), t = clamp(p * n - ci);
+      if (ci !== cur) { cur = ci; chaps.forEach((c, k) => c.classList.toggle('on', k === ci)); dots.forEach((d, k) => d.classList.toggle('on', k === ci)); load(S[ci]); if (S[ci + 1]) load(S[ci + 1]); }
+      fade.style.opacity = 1 - clamp(Math.min(ci === 0 ? 1 : t / .06, ci === n - 1 ? 1 : (1 - t) / .06));
+      barI.style.transform = `scaleX(${p})`;
+      draw(ci, t);
+    }
+    addEventListener('resize', size, { passive: true }); size();
+    return { S, load, frameAt, size };
+  })();
+
   /* =========================================================
      DIBUJOS DE LA PARED (SVG que se dibuja con el scroll)
      ========================================================= */
@@ -238,7 +288,7 @@
   requestAnimationFrame(tick);
   const ready = () => { real = 1; enterBtn.disabled = false; muteBtn.disabled = false; };
   Promise.race([
-    Promise.all([seqBy('latte').load(p => real = Math.max(real, p * .95), 2), document.fonts ? document.fonts.ready : 0]),
+    Promise.all([Lab ? Lab.load(Lab.S[0], 2, p => real = Math.max(real, p * .95)) : 0, document.fonts ? document.fonts.ready : 0]),
     new Promise(r => setTimeout(r, 9000))
   ]).then(ready);
 
@@ -251,7 +301,7 @@
     setTimeout(() => { body.classList.remove('locked'); G.active = true; $('#gl').classList.add('on'); $('#hero').classList.add('in'); $$('#hero [data-split], #hero [data-split-words]').forEach(e => e.classList.add('in')); }, 650);
     setTimeout(() => gate.classList.add('gone'), 1400);
     // resto de las secuencias en segundo plano, en orden
-    (async () => { for (const n of ['latte', 'espresso', 'filtro', 'ice']) await seqBy(n).load(); })();
+    (async () => { if (Lab) for (const x of Lab.S) await Lab.load(x); for (const n of ['latte', 'espresso', 'filtro', 'ice']) await seqBy(n).load(); })();
   }
   enterBtn.addEventListener('click', () => enter(true));
   muteBtn.addEventListener('click', () => enter(false));
@@ -281,7 +331,7 @@
     vw = innerWidth; vh = innerHeight; G.mobile = mobile();
     pins.forEach(p => { p.top = p.el.offsetTop; p.h = p.el.offsetHeight; });
     trackW = track.scrollWidth;
-    seqs.forEach(s => s.resize());
+    seqs.forEach(s => s.resize()); if (Lab) Lab.size();
     // el lugar: alto según el ancho del carrusel
     const lugar = pins.find(p => p.id === 'lugar');
     lugar.el.style.setProperty('--h', Math.max(trackW - vw, 0) + vh * 1.4 + 'px');
@@ -383,6 +433,7 @@
       else if (p.el.classList.contains('seq-section')) seqFrame(seqs.find(s => s.sec === p.el), pr);
       else if (p.id === 'lugar') hsFrame(pr);
       else if (p.id === 'video') vexpFrame(pr);
+      else if (p.id === 'lab' && Lab) Lab.frameAt(pr);
     });
     const h = pins[0]; if (!near(h)) G.hero = 1;
 
