@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Outfit:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/seq/latte/001.webp">
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -25,6 +25,7 @@
     <h1 class="wordmark gate-mark" aria-label="valmass">
       <span>v</span><span>a</span><span>l</span><span>m</span><span>a</span><span>s</span><span>s</span>
     </h1>
+    <p class="gate-sub">café de especialidad</p>
     <div class="gate-load"><div class="gate-bar"><i></i></div><span class="mono gate-pct">0%</span></div>
     <div class="gate-actions">
       <button class="btn btn-yellow" id="enter" disabled><span>Entrar</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -40,10 +41,11 @@
 
 <!-- ============ HEADER ============ -->
 <header id="top">
-  <a href="#hero" class="wordmark logo" aria-label="Valmass, inicio">valmass</a>
+  <a href="#hero" class="logo sign" aria-label="Valmass, inicio"><span class="wordmark">valmass</span><small>café de especialidad</small></a>
   <nav class="nav">
-    <a href="#arte">El café</a>
-    <a href="#origenes">Orígenes</a>
+    <a href="#lab">La gota</a>
+    <a href="#cafes">Cafés</a>
+    <a href="#tes">Tés</a>
     <a href="#carta">Carta</a>
     <a href="#lugar">El lugar</a>
     <a href="#visita">Visitanos</a>
@@ -55,11 +57,12 @@
   </div>
 </header>
 <div id="menu" aria-hidden="true">
-  <a href="#arte" data-i="0">El café</a>
-  <a href="#origenes" data-i="1">Orígenes</a>
-  <a href="#carta" data-i="2">Carta</a>
-  <a href="#lugar" data-i="3">El lugar</a>
-  <a href="#visita" data-i="4">Visitanos</a>
+  <a href="#lab" data-i="0">La gota</a>
+  <a href="#cafes" data-i="1">Cafés</a>
+  <a href="#tes" data-i="2">Tés</a>
+  <a href="#carta" data-i="3">Carta</a>
+  <a href="#lugar" data-i="4">El lugar</a>
+  <a href="#visita" data-i="5">Visitanos</a>
   <p class="mono">Balcarce 510 · SMT<br>Lun a Sáb · 7:30–13:00 · 16:30–21:30</p>
 </div>
 
@@ -77,7 +80,7 @@
       <span class="ht-line l2"><em data-split>el</em> <span data-split>grano.</span></span>
     </h2>
     <div class="hero-meta">
-      <p class="mono kicker"><b>Sección 00</b> — Valmass</p>
+      <p class="mono kicker"><b>Valmass</b> — Café de especialidad</p>
       <p class="lead" data-split-words>Café de especialidad, preparado con pasión, en el corazón de San Miguel de Tucumán.</p>
       <div class="hero-cta">
         <a href="#carta" class="btn btn-yellow magnetic"><span>Ver la carta</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -96,14 +99,49 @@
   </div>
 </div>
 
+
+<!-- ============ LABORATORIO 3D: gota, espresso, filtrado, latte art ============ -->
+<section id="lab" class="pin lab" style="--h:880vh" data-chap="0">
+  <div class="sticky">
+    <canvas class="lab-canvas" aria-hidden="true"></canvas>
+    <div class="lab-vignette"></div>
+    <div class="lab-fade"></div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>01</b> — La gota</p>
+      <h2 class="lab-h">Oro en<br><em>cada gota.</em></h2>
+      <p class="body">Así cae el espresso del portafiltro: denso, dorado, con crema. Todo lo que pasa en la taza empieza en una gota.</p>
+    </div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>02</b> — Espresso</p>
+      <h2 class="lab-h">Desde el<br><em>portafiltro.</em></h2>
+      <p class="body">Traba, presión y extracción. Dos hilos de café que llenan el vaso con su crema.</p>
+    </div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>03</b> — Filtrado</p>
+      <h2 class="lab-h">Gota<br><em>a gota.</em></h2>
+      <p class="body">Agua en espiral sobre el V60, la cama de café respira y el filtrado cae limpio en la jarra.</p>
+    </div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>04</b> — Latte art</p>
+      <h2 class="lab-h">La firma<br><em>de la casa.</em></h2>
+      <p class="body">Leche sedosa sobre el espresso: base, hojas, corazón y un último trazo. La rosetta en la taza amarilla.</p>
+    </div>
+    <div class="lab-dots mono" aria-hidden="true"><i>La gota</i><i>Espresso</i><i>Filtrado</i><i>Latte art</i></div>
+    <div class="lab-bar"><i></i></div>
+    <div class="sign sign-badge" aria-hidden="true"><span class="wordmark">valmass</span><small>café de especialidad</small></div>
+  </div>
+</section>
+
+<!-- ============ EN LA BARRA: videos reales ============ -->
+<div class="bar-intro"><p class="mono kicker"><b>En la barra</b> — Valmass de verdad</p><h2 class="display" data-split>Y así se ve</h2><h2 class="display it" data-split>en el local.</h2></div>
 <!-- ============ 01 EL ARTE (latte art) ============ -->
-<section id="arte" class="pin seq-section" style="--h:420vh" data-seq="latte" data-frames="79">
+<section id="arte" class="pin seq-section" style="--h:340vh" data-seq="latte" data-frames="79">
   <div class="sticky">
     <canvas class="seq-bg"></canvas>
     <div class="seq-title big-title" aria-hidden="true"><span class="bt-a">Oro en</span><span class="bt-b">cada taza.</span></div>
     <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
     <div class="seq-copy left">
-      <p class="mono kicker"><b>Sección 01</b> — El arte</p>
+      <p class="mono kicker"><b>En la barra</b> — El arte</p>
       <h2 class="h2" data-split-words>Oro en cada taza.</h2>
       <p class="body" data-split-words>Leche sedosa, pulso firme y una rosetta que ya es firma de la casa. Servida en la taza amarilla de siempre.</p>
     </div>
@@ -118,13 +156,13 @@
 </section>
 
 <!-- ============ 02 LA EXTRACCIÓN ============ -->
-<section id="extraccion" class="pin seq-section dark" style="--h:420vh" data-seq="espresso" data-frames="90">
+<section id="extraccion" class="pin seq-section dark" style="--h:340vh" data-seq="espresso" data-frames="90">
   <div class="sticky">
     <canvas class="seq-bg"></canvas>
     <div class="seq-title big-title outline" aria-hidden="true"><span class="bt-a">La</span><span class="bt-b">extracción</span></div>
     <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
     <div class="seq-copy right">
-      <p class="mono kicker"><b>Sección 02</b> — La extracción</p>
+      <p class="mono kicker"><b>En la barra</b> — La extracción</p>
       <h2 class="h2" data-split-words>Del molino a la taza.</h2>
       <p class="body" data-split-words>Cada espresso pasa por las manos de nuestras baristas: molienda, distribución, tampeo y una extracción precisa.</p>
     </div>
@@ -135,47 +173,14 @@
   </div>
 </section>
 
-<!-- ============ 03 ORÍGENES ============ -->
-<section id="origenes" class="origins">
-  <div class="org-head">
-    <p class="mono kicker"><b>Sección 03</b> — Orígenes</p>
-    <h2 class="display" data-split>Dos orígenes,</h2>
-    <h2 class="display it" data-split>dos experiencias.</h2>
-    <p class="body narrow" data-split-words>Cada café tiene su propia personalidad, aromas y sabores. Descubrí la diversidad del café con nuestros orígenes disponibles.</p>
-  </div>
-  <div class="org-cards">
-    <article class="org-card tilt" style="--acc:#2f9a57">
-      <div class="oc-img"><img src="assets/img/granos-frasco.webp" alt="Granos de café de especialidad en frasco de vidrio" loading="lazy"></div>
-      <p class="mono oc-num">01 · Brasil</p>
-      <h3 class="oc-name">Paraíso</h3>
-      <p class="oc-txt">Origen Brasil. Para tu espresso de todos los días o para llevar a casa.</p>
-      <span class="oc-flag" aria-hidden="true"></span>
-    </article>
-    <article class="org-card tilt" style="--acc:#f2b51d">
-      <div class="oc-img"><img src="assets/img/molienda.webp" alt="Café recién molido cayendo en el portafiltro" loading="lazy"></div>
-      <p class="mono oc-num">02 · Colombia</p>
-      <h3 class="oc-name">Palmera</h3>
-      <p class="oc-txt">Origen Colombia. Preguntale a tu barista cómo prepararlo.</p>
-      <span class="oc-flag" aria-hidden="true"></span>
-    </article>
-  </div>
-  <div class="org-bag">
-    <div class="ob-photo reveal-clip"><img src="assets/img/bolsas-cafe.webp" alt="Bolsas de café en grano en la barra de Valmass" loading="lazy"></div>
-    <div class="ob-copy">
-      <div class="drawing" data-svg="assets/svg/bolsa.svg" aria-hidden="true"></div>
-      <h3 class="h3" data-split-words>Llevate Valmass a casa.</h3>
-      <p class="body" data-split-words>Tenemos café en grano para que prepares tu café de especialidad donde quieras.</p>
-    </div>
-  </div>
-</section>
 
 <!-- ============ 04 FILTRADO ============ -->
-<section id="filtrado" class="pin seq-section light" style="--h:460vh" data-seq="filtro" data-frames="104">
+<section id="filtrado" class="pin seq-section light" style="--h:360vh" data-seq="filtro" data-frames="104">
   <div class="sticky">
     <div class="drawing filtro-draw" data-svg="assets/svg/v60.svg" aria-hidden="true"></div>
     <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
     <div class="seq-copy left">
-      <p class="mono kicker"><b>Sección 04</b> — Filtrado</p>
+      <p class="mono kicker"><b>En la barra</b> — Filtrado</p>
       <h2 class="h2" data-split-words>También, filtrado.</h2>
       <p class="body" data-split-words>Cada taza la preparan nuestras baristas, capacitadas y apasionadas por el café de especialidad, buscando una extracción precisa.</p>
     </div>
@@ -189,17 +194,90 @@
 </section>
 
 <!-- ============ 05 ICE LATTE ============ -->
-<section id="ice" class="pin seq-section ice" style="--h:420vh" data-seq="ice" data-frames="86">
+<section id="ice" class="pin seq-section ice" style="--h:340vh" data-seq="ice" data-frames="86">
   <div class="sticky">
     <canvas class="seq-bg"></canvas>
     <div class="seq-title big-title" aria-hidden="true"><span class="bt-a">Ice</span><span class="bt-b">latte.</span></div>
     <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
     <div class="seq-copy right">
-      <p class="mono kicker"><b>Sección 05</b> — Refrescate</p>
+      <p class="mono kicker"><b>En la barra</b> — Refrescate</p>
       <h2 class="h2" data-split-words>Capuccino ICE Latte.</h2>
       <p class="body" data-split-words>Espresso, leche fría y hielo. El sabor del capuccino clásico para los días de calor en Tucumán.</p>
     </div>
     <div class="ice-flakes" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============ CAFÉS (Drupa) ============ -->
+<section id="cafes" class="shop">
+  <div class="shop-head">
+    <div>
+      <p class="mono kicker"><b>Cafés</b> — Para llevar</p>
+      <h2 class="display" data-split>Café en grano,</h2>
+      <h2 class="display it" data-split>tostado por Drupa.</h2>
+    </div>
+    <div class="shop-head-r">
+      <div class="drawing" data-svg="assets/svg/bolsa.svg" aria-hidden="true"></div>
+      <p class="body" data-split-words>Llevate a casa el café que tomás en Valmass. Paquetes de 250 g, en grano o molido para tu método.</p>
+    </div>
+  </div>
+  <div class="shop-filters" role="tablist" aria-label="Filtrar cafés">
+    <button data-f="all" aria-pressed="true">Todos</button><button data-f="brasil" aria-pressed="false">Brasil</button><button data-f="colombia" aria-pressed="false">Colombia</button><button data-f="peru" aria-pressed="false">Perú</button><button data-f="africa" aria-pressed="false">África</button><button data-f="blend" aria-pressed="false">Blends</button>
+  </div>
+  <div class="stage" aria-live="polite">
+    <div class="stage-orb"></div>
+    <div class="stage-ghost" aria-hidden="true"><span></span></div>
+    <div class="stage-bag">
+      <div class="bag-beans" aria-hidden="true"></div>
+      <div class="bag-card"><img alt="" class="bag-img"><img alt="" class="bag-img next"></div>
+      <div class="bag-shadow"></div>
+    </div>
+    <div class="stage-info">
+      <p class="mono si-origin"></p>
+      <h3 class="si-name"></h3>
+      <p class="si-notes"></p>
+      <dl class="si-table"></dl>
+      <div class="si-size"></div>
+      <div class="si-grind mono"></div>
+      <div class="si-buy">
+        <p class="si-price"><span class="mono si-cur">$</span><span class="si-num">0</span></p>
+        <a class="btn btn-yellow magnetic" href="https://www.instagram.com/valmass.cafe/" target="_blank" rel="noopener"><span>Pedilo en Valmass</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+    <div class="stage-nav">
+      <button class="sn-prev" aria-label="Café anterior"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <span class="mono sn-count">01 / 13</span>
+      <button class="sn-next" aria-label="Café siguiente"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <span class="sn-auto"><i></i></span>
+    </div>
+  </div>
+  <div class="rail" tabindex="0" aria-label="Todos los cafés"><div class="rail-track"></div></div>
+  <p class="mono shop-note">Precios de referencia de Drupa (oct. 2026). Consultá stock y moliendas en el local.</p>
+</section>
+
+<!-- ============ TÉS INTI ZEN ============ -->
+<section id="tes" class="teas">
+  <div class="tea-bg"></div>
+  <div class="tea-head">
+    <p class="mono kicker"><b>Tés</b> — Inti Zen</p>
+    <h2 class="display" data-split>¿Mejor un té?</h2>
+    <p class="body" data-split-words>Los blends de Inés Berton, en cajas de 15 saquitos de 2 g.</p>
+  </div>
+  <div class="tea-wrap">
+    <ol class="tea-list"></ol>
+    <div class="tea-stage">
+      <div class="tea-ring"></div>
+      <div class="tea-steam" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="tea-leaves" aria-hidden="true"></div>
+      <div class="tea-box"><img alt="" class="tea-img"></div>
+    </div>
+    <div class="tea-info">
+      <p class="mono ti-base"></p>
+      <h3 class="ti-name"></h3>
+      <p class="ti-con"></p>
+      <p class="body ti-txt"></p>
+      <p class="ti-price"><span class="mono">$</span><span class="ti-num">5.550</span><small class="mono">· 15 saquitos</small></p>
+    </div>
   </div>
 </section>
 
@@ -212,10 +290,21 @@
   </blockquote>
 </section>
 
+<!-- ============ CARTEL (logo negro, letras blancas) ============ -->
+<section class="signband" aria-label="Valmass café de especialidad">
+  <div class="sb-inner">
+    <div class="sb-mark wordmark" aria-hidden="true"><span>v</span><span>a</span><span>l</span><span>m</span><span>a</span><span>s</span><span>s</span></div>
+    <p class="sb-sub mono">café de especialidad</p>
+  </div>
+  <div class="sb-rows" aria-hidden="true">
+    <div class="sb-row"><span>valmass café de especialidad · valmass café de especialidad · valmass café de especialidad · </span><span>valmass café de especialidad · valmass café de especialidad · valmass café de especialidad · </span></div>
+  </div>
+</section>
+
 <!-- ============ CARTA ============ -->
 <section id="carta" class="menu-sec">
   <div class="menu-head">
-    <p class="mono kicker"><b>Sección 06</b> — La carta</p>
+    <p class="mono kicker"><b>La carta</b> — Valmass</p>
     <h2 class="display" data-split>La carta.</h2>
     <div class="menu-tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="cafe">Café</button>
@@ -246,7 +335,7 @@
 <section id="lugar" class="pin hscroll" style="--h:420vh">
   <div class="sticky">
     <div class="hs-head">
-      <p class="mono kicker"><b>Sección 07</b> — El lugar</p>
+      <p class="mono kicker"><b>El lugar</b> — Balcarce 510</p>
       <h2 class="display" data-split>Redescubrí Valmass.</h2>
     </div>
     <div class="hs-track">
@@ -276,7 +365,7 @@
 <section id="visita" class="visit">
   <div class="visit-grid">
     <div class="visit-copy">
-      <p class="mono kicker"><b>Sección 08</b> — Visitanos</p>
+      <p class="mono kicker"><b>Visitanos</b> — Tucumán</p>
       <h2 class="display" data-split>Nos vemos</h2>
       <h2 class="display it yellow" data-split>en Valmass.</h2>
       <dl class="visit-data">
@@ -289,7 +378,7 @@
       </div>
     </div>
     <div class="visit-media">
-      <div class="vm-photo reveal-clip"><img src="assets/img/fachada-entrada.webp" alt="Entrada de Valmass Café sobre calle Balcarce" loading="lazy"></div>
+      <div class="vm-photo reveal-clip kb"><img src="assets/img/fachada-entrada.webp" alt="Entrada de Valmass Café sobre calle Balcarce" loading="lazy"></div>
       <div class="vm-map"><iframe title="Mapa: Balcarce 510, San Miguel de Tucumán" src="https://www.google.com/maps?q=Balcarce+510,+San+Miguel+de+Tucum%C3%A1n,+Tucum%C3%A1n&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     </div>
   </div>
@@ -299,6 +388,7 @@
 
 <footer class="foot">
   <div class="foot-mark wordmark" aria-hidden="true"><span>v</span><span>a</span><span>l</span><span>m</span><span>a</span><span>s</span><span>s</span></div>
+  <p class="foot-sub mono" aria-hidden="true">café de especialidad</p>
   <div class="foot-row mono">
     <span>Valmass · Café de Especialidad</span>
     <span>Balcarce 510 · San Miguel de Tucumán</span>
@@ -307,8 +397,10 @@
   </div>
 </footer>
 
-<script src="script.js?v=1"></script>
+<script src="data.js?v=2"></script>
+<script src="script.js?v=2"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
-<script type="module" src="beans.js?v=1"></script>
+<script type="module" src="beans.js?v=2"></script>
+<script type="module" src="brew.js?v=2"></script>
 </body>
 </html>

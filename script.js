@@ -44,7 +44,7 @@
   }
   $$('[data-split]').forEach(splitChars);
   $$('[data-split-words]').forEach(splitWords);
-  $$('.gate-mark span, .foot-mark span').forEach((s, i, a) => s.style.setProperty('--i', i % 7));
+  $$('.gate-mark span, .foot-mark span, .sb-mark span').forEach((s, i, a) => s.style.setProperty('--i', i % 7));
   $$('#menu a').forEach(a => a.style.setProperty('--i', a.dataset.i));
 
   /* =========================================================
@@ -260,7 +260,7 @@
      REVELADOS AL ENTRAR EN PANTALLA
      ========================================================= */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px' });
-  $$('[data-split], [data-split-words], .reveal-clip, .menu-list, .foot').forEach(el => { if (!el.closest('#hero')) io.observe(el); });
+  $$('[data-split], [data-split-words], .reveal-clip, .menu-list, .foot, .signband, .rail').forEach(el => { if (!el.closest('#hero')) io.observe(el); });
   $$('.menu-list').forEach(l => $$('.mi', l).forEach((m, i) => m.style.setProperty('--i', i)));
 
   /* =========================================================
@@ -271,7 +271,7 @@
   const mq = $('.mq-track');
   const track = $('.hs-track'), hsImgs = $$('.hs-img img');
   const vbox = $('.vexp-box'), vvid = $('.vexp-video'), vtext = $('.vexp-text');
-  const origins = $('#origenes');
+  const origins = $('.bar-intro');
   const header = $('header'), glCanvas = $('#gl');
   const flakesBox = $('.ice-flakes');
   const flakes = Array.from({ length: 34 }, () => { const i = document.createElement('i'); flakesBox.appendChild(i); return { el: i, x: Math.random(), y: Math.random(), z: .4 + Math.random() * 1.2, r: Math.random() * 360 }; });
@@ -468,6 +468,140 @@
     fl.style.transform = `translate(${fx}px,${fy}px) translate(-50%,-50%) scale(${flOn ? 1 : .6}) rotate(${clamp(dx * .6, -12, 12)}deg)`;
     requestAnimationFrame(floatLoop);
   })();
+
+
+  /* =========================================================
+     CAFÉS (vitrina animada) y TÉS INTI ZEN
+     ========================================================= */
+  const D = window.VALMASS_DATA;
+  const fmt = n => Math.round(n).toLocaleString('es-AR');
+  if (D) {
+    const shopEl = $('#cafes'), stage = $('.stage'), info = $('.stage-info');
+    const imgs = $$('.bag-img'), card = $('.bag-card');
+    const rail = $('.rail'), track = $('.rail-track');
+    let list = D.cafes.slice(), idx = 0, size = '250', grind = 0, priceShown = 0, auto = null, idle = 0, inView = false;
+    // granos flotando alrededor del paquete
+    const beansBox = $('.bag-beans');
+    for (let i = 0; i < 9; i++) {
+      const b = document.createElement('i'); b.className = 'bean';
+      const a = i / 9 * Math.PI * 2;
+      b.style.cssText = `left:${50 + Math.cos(a) * 52}%;top:${50 + Math.sin(a) * 50}%;--d:${6 + Math.random() * 5}s;--dl:${-Math.random() * 6}s;--r:${Math.random() * 360}deg;--x:${(Math.random() - .5) * 40}px;--y:${-20 - Math.random() * 30}px;scale:${.55 + Math.random() * .7}`;
+      beansBox.appendChild(b);
+    }
+    // riel con todos los cafés
+    D.cafes.forEach((c, i) => {
+      const b = document.createElement('button'); b.className = 'rc'; b.style.setProperty('--i', i); b.style.setProperty('--rc', c.color); b.dataset.id = c.id; b.dataset.tipo = c.tipo;
+      b.innerHTML = `<span class="rc-img"><img src="${c.img}" alt="${c.nombre}" loading="lazy"></span><span class="rc-name">${c.nombre}</span><span class="rc-meta"><span>${c.origen}</span><span>$${fmt(c.precio)}</span></span>`;
+      b.addEventListener('click', () => { if (rail.moved) return; const k = list.findIndex(x => x.id === c.id); if (k < 0) { setFilter('all'); } go(list.findIndex(x => x.id === c.id), 1, true); });
+      track.appendChild(b);
+    });
+    const rcs = $$('.rc', track);
+    function countTo(to) {
+      const from = priceShown, t0 = performance.now(), el = $('.si-num');
+      const step = now => { const k = clamp((now - t0) / 800), e = 1 - Math.pow(1 - k, 3); priceShown = from + (to - from) * e; el.textContent = fmt(priceShown); if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }
+    function price(c) { return size === 'kg' && c.precioKg ? c.precioKg : c.precio; }
+    function fill(c) {
+      $('.si-origin').textContent = c.origen + (c.tipo === 'blend' ? ' · Blend' : '');
+      $('.si-name').textContent = c.nombre;
+      $('.si-notes').textContent = c.notas + '.';
+      const rows = [['Región', c.region], ['Varietal', c.varietal], ['Proceso', c.proceso], ['Altura', c.altura], ['Tueste', c.tueste], ['Cuerpo', c.cuerpo]].filter(r => r[1] && r[1] !== '—');
+      if (c.sca) rows.push(['Puntaje SCA', c.sca + ' pts']);
+      $('.si-table').innerHTML = rows.slice(0, 8).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+      const sz = $('.si-size');
+      sz.innerHTML = `<button aria-pressed="${size !== 'kg' || !c.precioKg}" data-s="250">250 g</button>` + (c.precioKg ? `<button aria-pressed="${size === 'kg'}" data-s="kg">1 kg</button>` : '');
+      $$('button', sz).forEach(b => b.addEventListener('click', () => { size = b.dataset.s; $$('button', sz).forEach(x => x.setAttribute('aria-pressed', String(x === b))); countTo(price(c)); swapImg(size === 'kg' && c.imgKg ? c.imgKg : c.img, 1); hold(); }));
+      $('.si-grind').innerHTML = D.molienda.map((m, i) => `<button aria-pressed="${i === grind}">${m}</button>`).join('');
+      $$('.si-grind button').forEach((b, i) => b.addEventListener('click', () => { grind = i; $$('.si-grind button').forEach((x, j) => x.setAttribute('aria-pressed', String(j === i))); hold(); }));
+      $('.stage-ghost span').textContent = (c.nombre + ' · ' + c.origen + ' · ').repeat(4);
+      $('.sn-count').textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(list.length).padStart(2, '0');
+      countTo(price(c));
+    }
+    let front = 0;
+    function swapImg(src, dir) {
+      const cur = imgs[front], nxt = imgs[1 - front];
+      nxt.className = 'bag-img enter' + (dir < 0 ? ' back' : ''); nxt.src = src;
+      void nxt.offsetWidth;
+      nxt.className = 'bag-img';
+      cur.className = 'bag-img leave' + (dir < 0 ? ' back' : '');
+      front = 1 - front;
+    }
+    function go(i, dir = 1, user = false) {
+      if (!list.length) return;
+      idx = (i + list.length) % list.length;
+      const c = list[idx];
+      if (!c.precioKg) size = '250';
+      shopEl.style.setProperty('--c', c.color);
+      swapImg(c.img, dir);
+      info.classList.add('swap');
+      setTimeout(() => { fill(c); info.classList.remove('swap'); }, 320);
+      rcs.forEach(r => r.classList.toggle('on', r.dataset.id === c.id));
+      const on = rcs.find(r => r.dataset.id === c.id);
+      if (on && user !== 'init') rail.scrollTo({ left: on.offsetLeft - rail.clientWidth / 2 + on.clientWidth / 2, behavior: 'smooth' });
+      if (user === true) hold();
+      restartAuto();
+    }
+    function hold() { idle = performance.now(); }
+    function restartAuto() { const a = $('.sn-auto'); a.classList.remove('run'); void a.offsetWidth; if (inView) a.classList.add('run'); clearTimeout(auto); auto = setTimeout(tickAuto, 6000); }
+    function tickAuto() { if (inView && performance.now() - idle > 12000) go(idx + 1, 1); else restartAuto(); }
+    function setFilter(f) {
+      $$('.shop-filters button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.f === f)));
+      list = D.cafes.filter(c => f === 'all' || c.tipo === f);
+      rcs.forEach(r => r.classList.toggle('hide', !(f === 'all' || r.dataset.tipo === f)));
+      rail.scrollTo({ left: 0 });
+    }
+    $$('.shop-filters button').forEach(b => b.addEventListener('click', () => { setFilter(b.dataset.f); go(0, 1, true); }));
+    $('.sn-prev').addEventListener('click', () => go(idx - 1, -1, true));
+    $('.sn-next').addEventListener('click', () => go(idx + 1, 1, true));
+    // arrastrar el riel con el mouse
+    let dx = 0, sl = 0, down = false;
+    rail.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; rail.moved = false; dx = e.clientX; sl = rail.scrollLeft; });
+    addEventListener('pointermove', e => { if (!down) return; const d = e.clientX - dx; if (Math.abs(d) > 5) { rail.moved = true; rail.classList.add('drag'); } rail.scrollLeft = sl - d; });
+    addEventListener('pointerup', () => { down = false; rail.classList.remove('drag'); setTimeout(() => rail.moved = false, 50); });
+    // inclinación 3D del paquete con el mouse
+    const bagWrap = $('.stage-bag');
+    bagWrap.addEventListener('pointermove', e => { const r = bagWrap.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; card.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 16}deg)`; });
+    bagWrap.addEventListener('pointerleave', () => card.style.transform = '');
+    // swipe en celular
+    let sx0 = null;
+    bagWrap.addEventListener('touchstart', e => sx0 = e.touches[0].clientX, { passive: true });
+    bagWrap.addEventListener('touchend', e => { if (sx0 === null) return; const d = e.changedTouches[0].clientX - sx0; if (Math.abs(d) > 40) go(idx + (d < 0 ? 1 : -1), d < 0 ? 1 : -1, true); sx0 = null; });
+    new IntersectionObserver(es => { inView = es[0].isIntersecting; restartAuto(); }, { threshold: .3 }).observe(stage);
+    imgs[0].src = D.cafes[0].img; go(0, 1, 'init');
+
+    /* ---------- tés ---------- */
+    const teas = $('#tes'), tl = $('.tea-list'), timg = $('.tea-img'), tinfo = $('.tea-info');
+    let ti = 0, tAuto = null, tIdle = 0, tIn = false;
+    D.tes.forEach((t, i) => {
+      const li = document.createElement('li'), b = document.createElement('button');
+      b.textContent = t.nombre; b.style.setProperty('--dot', t.color); b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => { tIdle = performance.now(); pickTea(i); });
+      li.appendChild(b); tl.appendChild(li);
+    });
+    const leaves = $('.tea-leaves');
+    for (let i = 0; i < 10; i++) { const l = document.createElement('i'); l.className = 'leaf'; l.style.cssText = `left:${10 + Math.random() * 80}%;top:${55 + Math.random() * 40}%;--d:${7 + Math.random() * 6}s;--dl:${-Math.random() * 10}s;--x:${(Math.random() - .5) * 160}px`; leaves.appendChild(l); }
+    function pickTea(i) {
+      ti = (i + D.tes.length) % D.tes.length; const t = D.tes[ti];
+      teas.style.setProperty('--t', t.color);
+      $$('button', tl).forEach((b, k) => b.setAttribute('aria-pressed', String(k === ti)));
+      timg.classList.add('swap'); tinfo.classList.add('swap');
+      setTimeout(() => {
+        timg.src = `assets/drupa/${t.id}.webp`; timg.alt = 'Té Inti Zen ' + t.nombre;
+        $('.ti-base').textContent = t.base; $('.ti-name').textContent = t.nombre; $('.ti-con').textContent = 'Con ' + t.con.charAt(0).toLowerCase() + t.con.slice(1) + '.';
+        $('.ti-txt').textContent = t.txt; $('.ti-num').textContent = fmt(D.tePrecio);
+        timg.onload = () => timg.classList.remove('swap'); setTimeout(() => timg.classList.remove('swap'), 400);
+        tinfo.classList.remove('swap');
+      }, 350);
+      schedTea();
+    }
+    function schedTea() { clearTimeout(tAuto); tAuto = setTimeout(() => { if (tIn && performance.now() - tIdle > 10000) pickTea(ti + 1); else schedTea(); }, 5000); }
+    new IntersectionObserver(es => tIn = es[0].isIntersecting, { threshold: .3 }).observe(teas);
+    const tbox = $('.tea-box'), tstage = $('.tea-stage');
+    tstage.addEventListener('pointermove', e => { const r = tstage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; tbox.style.transform = `rotateY(${x * 24}deg) rotateX(${-y * 18}deg)`; });
+    tstage.addEventListener('pointerleave', () => tbox.style.transform = '');
+    pickTea(0);
+  }
 
   /* =========================================================
      MENÚ CELULAR + ANCLAS

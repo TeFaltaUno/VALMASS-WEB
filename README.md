@@ -1,4 +1,4 @@
-# VALMASS WEB V1 · "Despertá el grano"
+# VALMASS WEB V2 · "Despertá el grano"
 
 Web de **Valmass Café de Especialidad**, en Balcarce 510, San Miguel de Tucumán.
 Es un sitio estático, igual que FAT-WEB: HTML, CSS y JavaScript propio, más Three.js desde CDN. No necesita instalar nada ni compilar.
@@ -18,6 +18,12 @@ Es un sitio estático, igual que FAT-WEB: HTML, CSS y JavaScript propio, más Th
 11. **Video** que se expande a pantalla completa ("Las tardes en Valmass son magia").
 12. **08 · Visitanos:** dirección, horarios, mapa y botones para cómo llegar e Instagram.
 13. **Footer** amarillo con el logo gigante.
+
+## Novedades V2
+- **Laboratorio 3D** (`brew.js`): la gota de espresso cae del pico y salpica, el portafiltro de mango de madera extrae dos hilos que llenan el vaso, el filtrado V60 con pava cuello de cisne y el latte art (rosetta) que se dibuja en vivo en la taza amarilla. Todo hecho por código y manejado por el scroll.
+- **Cafés para llevar**: 13 cafés de Drupa con origen, varietal, proceso, altura, tueste, notas y precio, en una vitrina animada con filtros. Los datos están en `data.js`.
+- **Tés Inti Zen**: 11 blends con precio.
+- **Logo negro con letras blancas**: en la entrada, el header, el cartel gigante y el footer.
 
 ## Archivos
 - `index.html` · `style.css` · `script.js` (motor de scroll, secuencias y música) · `beans.js` (granos 3D)
