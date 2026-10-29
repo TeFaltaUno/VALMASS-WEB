@@ -294,7 +294,7 @@ header.solid{background:linear-gradient(rgba(18,12,8,.85),rgba(18,12,8,0))}
   .nav,.head-right .btn{display:none}
   .menu-btn{display:block}
   .logo{font-size:26px}
-  .hero-title{font-size:clamp(64px,21vw,140px)}
+  .hero-title{font-size:clamp(50px,16.5vw,120px)}
   .hero-meta{flex-direction:column;align-items:flex-start;gap:20px}
   .scroll-hint{display:none}
   .seq-frame{width:100vw;height:100svh;aspect-ratio:auto;border-radius:0;box-shadow:none}
@@ -557,3 +557,10 @@ header.solid{background:linear-gradient(rgba(18,12,8,.85),rgba(18,12,8,0))}
   .film .sign-badge{bottom:calc(3.5vh + 40px)}
   .film-hint{bottom:calc(3.5vh + 46px);left:var(--pad);transform:none}
 }
+
+/* ---------- V5: renders de Blender ---------- */
+.hero-bg{position:absolute;inset:-4%;background:url(assets/film/hero.webp) center/cover no-repeat;transform:scale(1.08);animation:herokb 22s ease-in-out infinite alternate;opacity:.85}
+.hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 45%,rgba(10,6,4,.25),rgba(10,6,4,.85))}
+@keyframes herokb{to{transform:scale(1.16) translate(-1.5%,1%)}}
+.hero-ghost{z-index:1}
+.hero-title{z-index:2;text-shadow:0 8px 60px rgba(0,0,0,.5)}

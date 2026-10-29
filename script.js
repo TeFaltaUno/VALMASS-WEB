@@ -213,10 +213,10 @@
      CINE (sección #lab): 4 videos de café manejados por el scroll
      ========================================================= */
   const Lab = (() => {
-    const sec = $('#lab'); if (!sec) return null;
+    const sec = $('#film'); if (!sec) return null;
     const cv = $('.lab-canvas', sec), cx = cv.getContext('2d');
     const chaps = $$('.lab-chap', sec), dots = $$('.lab-dots i', sec), fade = $('.lab-fade', sec), barI = $('.lab-bar i', sec);
-    const defs = [['cine-granos', 92], ['cine-porta', 98], ['cine-gota', 110], ['cine-leche', 108]];
+    const defs = (sec.dataset.scenes || '').split(',').map(x => { const [n, c] = x.split(':'); return [n, +c]; });
     const S = defs.map(([name, n]) => ({ name, n, frames: new Array(n), started: false, full: null }));
     function load(s, stride = 1, onP) {
       if (stride === 1 && s.full) return s.full;
@@ -229,7 +229,7 @@
           const i = want[k++]; if (s.frames[i]) { done++; next(); return; }
           active++; const img = new Image(); img.decoding = 'async';
           img.onload = img.onerror = () => { if (img.naturalWidth) s.frames[i] = img; active--; done++; onP && onP(done / want.length); last = -1; next(); if (k >= want.length && !active) res(); };
-          img.src = `assets/seq/${s.name}/${String(i + 1).padStart(3, '0')}.webp`;
+          img.src = `assets/film/${s.name}/${String(i + 1).padStart(3, '0')}.webp`;
         };
         for (let c = 0; c < 6; c++) next();
       });
@@ -238,20 +238,22 @@
     }
     function size() { const r = dpr(); cv.width = Math.round(cv.clientWidth * r) || 1; cv.height = Math.round(cv.clientHeight * r) || 1; last = -1; }
     let last = -1, cur = -1;
+    const near = (s, i) => { for (let d = 0; d < s.n; d++) { if (s.frames[i - d]) return s.frames[i - d]; if (s.frames[i + d]) return s.frames[i + d]; } return null; };
     function draw(ci, t) {
-      const s = S[ci], i = Math.round(clamp(t) * (s.n - 1)), key = ci * 1000 + i + Math.round(t * 200) / 1000;
+      const s = S[ci], f = clamp(t) * (s.n - 1), i = Math.floor(f), fr = f - i, key = ci * 1000 + Math.round(f * 40) / 40;
       if (key === last) return; last = key;
-      let img = null; for (let d = 0; d < s.n && !img; d++) img = s.frames[i - d] || s.frames[i + d];
-      if (!img) return;
-      const z = 1.04 + t * .08, iw = img.naturalWidth, ih = img.naturalHeight;
-      const sc = Math.max(cv.width / iw, cv.height / ih) * z, w = iw * sc, h = ih * sc;
-      cx.drawImage(img, (cv.width - w) / 2, (cv.height - h) / 2, w, h);
+      const a = near(s, i), b = s.frames[Math.min(i + 1, s.n - 1)];
+      if (!a) return;
+      const z = 1.02 + t * .05, iw = a.naturalWidth, ih = a.naturalHeight;
+      const sc = Math.max(cv.width / iw, cv.height / ih) * z, w = iw * sc, h = ih * sc, x = (cv.width - w) / 2, y = (cv.height - h) / 2;
+      cx.globalAlpha = 1; cx.drawImage(a, x, y, w, h);
+      if (b && b !== a && fr > .02) { cx.globalAlpha = fr; cx.drawImage(b, x, y, w, h); cx.globalAlpha = 1; }
     }
     function frameAt(p) {
       const n = S.length, ci = Math.min(n - 1, Math.floor(p * n)), t = clamp(p * n - ci);
       if (ci !== cur) { cur = ci; chaps.forEach((c, k) => c.classList.toggle('on', k === ci)); dots.forEach((d, k) => d.classList.toggle('on', k === ci)); load(S[ci]); if (S[ci + 1]) load(S[ci + 1]); }
       fade.style.opacity = 1 - clamp(Math.min(ci === 0 ? 1 : t / .06, ci === n - 1 ? 1 : (1 - t) / .06));
-      barI.style.transform = `scaleX(${p})`;
+      barI.style.transform = `scaleX(${p})`; sec.toggleAttribute('data-started', p > .015);
       draw(ci, t);
     }
     addEventListener('resize', size, { passive: true }); size();
@@ -288,7 +290,7 @@
   requestAnimationFrame(tick);
   const ready = () => { real = 1; enterBtn.disabled = false; muteBtn.disabled = false; };
   Promise.race([
-    Promise.all([new Promise(res => { if (!$('#film')) return res(); G.onFilmProgress = f => { real = Math.max(real, f * .97); if (f >= 1) res(); }; }), document.fonts ? document.fonts.ready : 0]),
+    Promise.all([Lab ? Lab.load(Lab.S[0], 2, p => real = Math.max(real, p * .95)) : 0, document.fonts ? document.fonts.ready : 0]),
     new Promise(r => setTimeout(r, 14000))
   ]).then(ready);
 
@@ -298,7 +300,7 @@
     let pref = 'on'; try { pref = localStorage.getItem('valmass-music') || 'on'; } catch (e) {}
     if (withSound && pref !== 'off') Music.start();
     gate.classList.add('out');
-    setTimeout(() => { body.classList.remove('locked'); G.active = true; $('#gl').classList.add('on'); $('#hero').classList.add('in'); $$('#hero [data-split], #hero [data-split-words]').forEach(e => e.classList.add('in')); }, 650);
+    setTimeout(() => { body.classList.remove('locked'); G.active = true; $('#hero').classList.add('in'); $$('#hero [data-split], #hero [data-split-words]').forEach(e => e.classList.add('in')); }, 650);
     setTimeout(() => gate.classList.add('gone'), 1400);
     // resto de las secuencias en segundo plano, en orden
     (async () => { if (Lab) for (const x of Lab.S) await Lab.load(x); for (const s of seqs) await s.load(); })();
@@ -433,13 +435,12 @@
       else if (p.el.classList.contains('seq-section')) seqFrame(seqs.find(s => s.sec === p.el), pr);
       else if (p.id === 'lugar') hsFrame(pr);
       else if (p.id === 'video') vexpFrame(pr);
-      else if (p.id === 'lab' && Lab) Lab.frameAt(pr);
+      else if (p.id === 'film' && Lab) Lab.frameAt(pr);
     });
     const h = pins[0]; if (!near(h)) G.hero = 1;
 
     // granos en Orígenes
     if (origins) { const ro = origins.getBoundingClientRect(); G.origins = ro.top < vh && ro.bottom > vh * .55 ? clamp((vh - ro.top) / (ro.height + vh)) : -1; G.orgFade = clamp((ro.bottom - vh * .55) / (vh * .4)); } else G.origins = -1;
-    glCanvas.style.visibility = entered && (G.hero < .995 || G.origins >= 0) ? 'visible' : 'hidden';
 
     // marquesina reactiva a la velocidad del scroll
     mqX -= 1.2 + Math.abs(vel) * .6;

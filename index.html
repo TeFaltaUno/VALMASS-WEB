@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Outfit:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -36,7 +36,6 @@
 
 <div id="cursor" aria-hidden="true"><i></i><span></span></div>
 <div class="grain" aria-hidden="true"></div>
-<canvas id="gl" aria-hidden="true"></canvas>
 
 <!-- ============ HEADER ============ -->
 <header id="top">
@@ -68,8 +67,9 @@
 <main>
 
 <!-- ============ HERO (granos 3D) ============ -->
-<section id="hero" class="pin" style="--h:320vh">
+<section id="hero" class="pin" style="--h:260vh">
   <div class="sticky">
+    <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-ghost" aria-hidden="true">
       <span class="ghost-row r1">GRANO · GRANO · GRANO · GRANO · GRANO · GRANO ·</span>
       <span class="ghost-row r2">TUCUMÁN · TUCUMÁN · TUCUMÁN · TUCUMÁN ·</span>
@@ -99,8 +99,8 @@
 </div>
 
 
-<!-- ============ LA PELÍCULA: 8 escenas 3D cinematográficas (film.js) ============ -->
-<section id="film" class="pin lab film" style="--h:1150vh">
+<!-- ============ LA PELÍCULA: 7 escenas renderizadas en Blender (Cycles) ============ -->
+<section id="film" class="pin lab film" style="--h:1000vh" data-scenes="grano:30,extraccion:40,gota:36,latte:36,filtrado:30,ice:30,final:24">
   <div class="sticky">
     <canvas class="lab-canvas" aria-hidden="true"></canvas>
     <div class="lab-vignette"></div>
@@ -112,41 +112,36 @@
       <p class="body">Café de especialidad, seleccionado y tostado para que cada taza tenga carácter.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>02</b> — La molienda</p>
-      <h2 class="lab-h">Molido al<br><em>momento.</em></h2>
-      <p class="body">El café cae fresco en el portafiltro y se tampea a mano, parejo, firme.</p>
-    </div>
-    <div class="lab-chap">
-      <p class="mono kicker"><b>03</b> — La extracción</p>
+      <p class="mono kicker"><b>02</b> — La extracción</p>
       <h2 class="lab-h">Oro en<br><em>cada gota.</em></h2>
-      <p class="body">Traba, presión y dos hilos dorados que llenan la taza amarilla de crema.</p>
+      <p class="body">El portafiltro traba en la máquina y caen dos hilos dorados que llenan la taza amarilla de crema.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>04</b> — La gota</p>
+      <p class="mono kicker"><b>03</b> — La gota</p>
       <h2 class="lab-h">Una gota,<br><em>todo el sabor.</em></h2>
       <p class="body">Densa, brillante, con aroma a cacao y caramelo. Así cae el espresso en cámara lenta.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>05</b> — Latte art</p>
+      <p class="mono kicker"><b>04</b> — Latte art</p>
       <h2 class="lab-h">La firma<br><em>de la casa.</em></h2>
       <p class="body">Leche sedosa sobre el espresso: base, hojas, corazón y un último trazo.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>06</b> — Filtrado</p>
+      <p class="mono kicker"><b>05</b> — Filtrado</p>
       <h2 class="lab-h">Gota<br><em>a gota.</em></h2>
-      <p class="body">Agua en espiral sobre el V60, la cama de café respira y el filtrado cae limpio.</p>
+      <p class="body">Agua en espiral sobre el V60, la cama de café respira y el filtrado cae limpio en la jarra.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>07</b> — Ice latte</p>
+      <p class="mono kicker"><b>06</b> — Ice latte</p>
       <h2 class="lab-h">Refrescate<br><em>en Valmass.</em></h2>
       <p class="body">Hielo, leche fría y espresso en cascada, para los días de calor en Tucumán.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>08</b> — Valmass</p>
+      <p class="mono kicker"><b>07</b> — Valmass</p>
       <h2 class="lab-h">Nos vemos<br><em>en Valmass.</em></h2>
       <p class="body">Balcarce 510, San Miguel de Tucumán. Lunes a sábado de 7:30 a 13:00 y de 16:30 a 21:30.</p>
     </div>
-    <div class="lab-dots mono" aria-hidden="true"><i>El grano</i><i>La molienda</i><i>La extracción</i><i>La gota</i><i>Latte art</i><i>Filtrado</i><i>Ice latte</i><i>Valmass</i></div>
+    <div class="lab-dots mono" aria-hidden="true"><i>El grano</i><i>La extracción</i><i>La gota</i><i>Latte art</i><i>Filtrado</i><i>Ice latte</i><i>Valmass</i></div>
     <div class="lab-bar"><i></i></div>
     <div class="sign sign-badge" aria-hidden="true"><span class="wordmark">valmass</span><small>café de especialidad</small></div>
     <div class="film-hint mono" aria-hidden="true"><span>Deslizá</span><i></i></div>
@@ -332,10 +327,7 @@
   </div>
 </footer>
 
-<script src="data.js?v=4"></script>
-<script src="script.js?v=4"></script>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
-<script type="module" src="beans.js?v=4"></script>
-<script type="module" src="film.js?v=4"></script>
+<script src="data.js?v=6"></script>
+<script src="script.js?v=6"></script>
 </body>
 </html>

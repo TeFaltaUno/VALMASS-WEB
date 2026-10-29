@@ -1,4 +1,4 @@
-# VALMASS WEB V4 · "La película" · "Despertá el grano"
+# VALMASS WEB V5 · "La película" · "Despertá el grano"
 
 Web de **Valmass Café de Especialidad**, en Balcarce 510, San Miguel de Tucumán.
 Es un sitio estático, igual que FAT-WEB: HTML, CSS y JavaScript propio, más Three.js desde CDN. No necesita instalar nada ni compilar.
@@ -19,18 +19,18 @@ Es un sitio estático, igual que FAT-WEB: HTML, CSS y JavaScript propio, más Th
 12. **08 · Visitanos:** dirección, horarios, mapa y botones para cómo llegar e Instagram.
 13. **Footer** amarillo con el logo gigante.
 
-## V4 · La película 3D (`film.js`)
-Ocho escenas 3D cinematográficas que avanzan con el scroll (o deslizando el dedo). No usa ningún video:
-1. **El grano:** lluvia de granos en un haz de luz.
-2. **La molienda:** el café cae en el portafiltro y se tampea.
-3. **La extracción:** el portafiltro (mango de madera) traba en la máquina con el cartel Valmass y caen dos hilos dorados en la taza amarilla.
-4. **La gota:** una gota en cámara lenta, con corona y ondas en la crema.
-5. **Latte art:** la jarra dibuja la rosetta en vivo.
-6. **Filtrado:** pava cuello de cisne, V60 y jarra.
-7. **Ice latte:** hielo, leche y espresso en cascada.
-8. **Final:** la taza con la rosetta y el cartel negro "valmass café de especialidad".
+## V5 · La película renderizada en Blender
+Siete escenas 3D renderizadas con Blender Cycles (trazado de rayos), que avanzan cuadro a cuadro con el scroll o deslizando el dedo:
+1. **El grano:** granos de café tostado cayendo en cámara lenta.
+2. **La extracción:** el portafiltro con mango de madera traba en la máquina negra con el cartel Valmass; dos hilos de espresso translúcido llenan la taza amarilla de crema.
+3. **La gota:** macro en cámara lenta de una gota de espresso con corona, ondas y rebote.
+4. **Latte art:** la jarra de acero vierte la leche y la rosetta se forma en la taza amarilla.
+5. **Filtrado:** pava cuello de cisne, V60 de cerámica, filtro de papel y café ámbar en la jarra de vidrio.
+6. **Ice latte:** hielo, leche y espresso bajando en vetas.
+7. **Final:** la taza con la rosetta y el cartel negro "valmass café de especialidad".
 
-Técnica: Three.js con iluminación HDRI de estudio (Poly Haven, CC0), texturas PBR de madera (Poly Haven, CC0), sombras suaves, profundidad de campo, bloom, grano de película, viñeta, aberración cromática y franjas de cine. En celular se usan versiones más livianas de los efectos.
+Iluminación HDRI de estudio y texturas de madera de Poly Haven (CC0). Los cuadros están en `assets/film/<escena>/NNN.webp`.
+Los archivos de Blender que generan las escenas no están en este repo (son scripts de producción).
 
 ## También
 - **Cafés para llevar** (Drupa) y **tés Inti Zen**, con precios en `data.js`.
@@ -38,7 +38,7 @@ Técnica: Three.js con iluminación HDRI de estudio (Poly Haven, CC0), texturas 
 
 ## Archivos
 - `index.html` · `style.css` · `script.js` (motor de scroll, secuencias y música) · `beans.js` (granos 3D)
-- `film.js`: la película 3D · `assets/3d`: HDRI y texturas
+- `assets/film`: cuadros renderizados de la película
 - `assets/img`: fotos sacadas de los reels de @valmass.cafe
 - `assets/svg`: dibujos de la pared del local, vectorizados
 
