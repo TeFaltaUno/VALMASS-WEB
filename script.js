@@ -288,8 +288,8 @@
   requestAnimationFrame(tick);
   const ready = () => { real = 1; enterBtn.disabled = false; muteBtn.disabled = false; };
   Promise.race([
-    Promise.all([Lab ? Lab.load(Lab.S[0], 2, p => real = Math.max(real, p * .95)) : 0, document.fonts ? document.fonts.ready : 0]),
-    new Promise(r => setTimeout(r, 9000))
+    Promise.all([new Promise(res => { if (!$('#film')) return res(); G.onFilmProgress = f => { real = Math.max(real, f * .97); if (f >= 1) res(); }; }), document.fonts ? document.fonts.ready : 0]),
+    new Promise(r => setTimeout(r, 14000))
   ]).then(ready);
 
   let entered = false;
@@ -301,7 +301,7 @@
     setTimeout(() => { body.classList.remove('locked'); G.active = true; $('#gl').classList.add('on'); $('#hero').classList.add('in'); $$('#hero [data-split], #hero [data-split-words]').forEach(e => e.classList.add('in')); }, 650);
     setTimeout(() => gate.classList.add('gone'), 1400);
     // resto de las secuencias en segundo plano, en orden
-    (async () => { if (Lab) for (const x of Lab.S) await Lab.load(x); for (const n of ['latte', 'espresso', 'filtro', 'ice']) await seqBy(n).load(); })();
+    (async () => { if (Lab) for (const x of Lab.S) await Lab.load(x); for (const s of seqs) await s.load(); })();
   }
   enterBtn.addEventListener('click', () => enter(true));
   muteBtn.addEventListener('click', () => enter(false));
@@ -324,7 +324,7 @@
   const origins = $('.bar-intro');
   const header = $('header'), glCanvas = $('#gl');
   const flakesBox = $('.ice-flakes');
-  const flakes = Array.from({ length: 34 }, () => { const i = document.createElement('i'); flakesBox.appendChild(i); return { el: i, x: Math.random(), y: Math.random(), z: .4 + Math.random() * 1.2, r: Math.random() * 360 }; });
+  const flakes = !flakesBox ? [] : Array.from({ length: 34 }, () => { const i = document.createElement('i'); flakesBox.appendChild(i); return { el: i, x: Math.random(), y: Math.random(), z: .4 + Math.random() * 1.2, r: Math.random() * 360 }; });
   let trackW = 0;
 
   function measure() {
@@ -438,9 +438,7 @@
     const h = pins[0]; if (!near(h)) G.hero = 1;
 
     // granos en Orígenes
-    const ro = origins.getBoundingClientRect();
-    G.origins = ro.top < vh && ro.bottom > vh * .55 ?clamp((vh - ro.top) / (ro.height + vh)) : -1;
-    G.orgFade = clamp((ro.bottom - vh * .55) / (vh * .4));
+    if (origins) { const ro = origins.getBoundingClientRect(); G.origins = ro.top < vh && ro.bottom > vh * .55 ? clamp((vh - ro.top) / (ro.height + vh)) : -1; G.orgFade = clamp((ro.bottom - vh * .55) / (vh * .4)); } else G.origins = -1;
     glCanvas.style.visibility = entered && (G.hero < .995 || G.origins >= 0) ? 'visible' : 'hidden';
 
     // marquesina reactiva a la velocidad del scroll
@@ -462,9 +460,9 @@
       header.classList.toggle('solid', y > 40);
     }
     // video: reproducir solo si está a la vista
-    const vr = vbox.getBoundingClientRect();
+    if (vbox) { const vr = vbox.getBoundingClientRect();
     const vin = vr.top < vh && vr.bottom > 0;
-    if (vin && vvid.paused) { vvid.preload = 'auto'; vvid.play().catch(() => {}); } else if (!vin && !vvid.paused) vvid.pause();
+    if (vin && vvid.paused) { vvid.preload = 'auto'; vvid.play().catch(() => {}); } else if (!vin && !vvid.paused) vvid.pause(); }
   }
   requestAnimationFrame(frame);
 

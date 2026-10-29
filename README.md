@@ -1,4 +1,4 @@
-# VALMASS WEB V3 · "Despertá el grano"
+# VALMASS WEB V4 · "La película" · "Despertá el grano"
 
 Web de **Valmass Café de Especialidad**, en Balcarce 510, San Miguel de Tucumán.
 Es un sitio estático, igual que FAT-WEB: HTML, CSS y JavaScript propio, más Three.js desde CDN. No necesita instalar nada ni compilar.
@@ -19,18 +19,28 @@ Es un sitio estático, igual que FAT-WEB: HTML, CSS y JavaScript propio, más Th
 12. **08 · Visitanos:** dirección, horarios, mapa y botones para cómo llegar e Instagram.
 13. **Footer** amarillo con el logo gigante.
 
-## Novedades V2
-- **Cine (V3)**: cuatro videos reales de café en alta calidad (granos cayendo en leche, espresso desde el portafiltro, extracción en vaso y leche en súper cámara lenta), manejados cuadro a cuadro por el scroll. Clips de Coverr (licencia gratuita para uso comercial, coverr.co/license), en `assets/seq/cine-*`.
-- **Cafés para llevar**: 13 cafés de Drupa con origen, varietal, proceso, altura, tueste, notas y precio, en una vitrina animada con filtros. Los datos están en `data.js`.
-- **Tés Inti Zen**: 11 blends con precio.
-- **Logo negro con letras blancas**: en la entrada, el header, el cartel gigante y el footer.
+## V4 · La película 3D (`film.js`)
+Ocho escenas 3D cinematográficas que avanzan con el scroll (o deslizando el dedo). No usa ningún video:
+1. **El grano:** lluvia de granos en un haz de luz.
+2. **La molienda:** el café cae en el portafiltro y se tampea.
+3. **La extracción:** el portafiltro (mango de madera) traba en la máquina con el cartel Valmass y caen dos hilos dorados en la taza amarilla.
+4. **La gota:** una gota en cámara lenta, con corona y ondas en la crema.
+5. **Latte art:** la jarra dibuja la rosetta en vivo.
+6. **Filtrado:** pava cuello de cisne, V60 y jarra.
+7. **Ice latte:** hielo, leche y espresso en cascada.
+8. **Final:** la taza con la rosetta y el cartel negro "valmass café de especialidad".
+
+Técnica: Three.js con iluminación HDRI de estudio (Poly Haven, CC0), texturas PBR de madera (Poly Haven, CC0), sombras suaves, profundidad de campo, bloom, grano de película, viñeta, aberración cromática y franjas de cine. En celular se usan versiones más livianas de los efectos.
+
+## También
+- **Cafés para llevar** (Drupa) y **tés Inti Zen**, con precios en `data.js`.
+- **Logo negro con letras blancas** en la entrada, el header, el cartel y el footer.
 
 ## Archivos
 - `index.html` · `style.css` · `script.js` (motor de scroll, secuencias y música) · `beans.js` (granos 3D)
-- `assets/seq/*`: cuadros de los videos para el scroll (latte, espresso, filtro, ice)
+- `film.js`: la película 3D · `assets/3d`: HDRI y texturas
 - `assets/img`: fotos sacadas de los reels de @valmass.cafe
 - `assets/svg`: dibujos de la pared del local, vectorizados
-- `assets/video`: videos comprimidos con sus portadas
 
 ## Música
 Arranca al tocar ENTRAR. Es un lo-fi original generado en el navegador, sin derechos de terceros.

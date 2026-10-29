@@ -536,3 +536,24 @@ header.solid{background:linear-gradient(rgba(18,12,8,.85),rgba(18,12,8,0))}
   .seq-steps,.seq-count,.timeline,.filter-steps{z-index:5}
   .hero-meta .lead{text-shadow:0 2px 16px rgba(0,0,0,.8)}
 }
+
+/* ---------- V4: la película 3D ---------- */
+.film{background:#050302}
+.letterbox i{position:absolute;left:0;right:0;height:5.5vh;background:#000;z-index:2;pointer-events:none}
+.letterbox i:first-child{top:0}.letterbox i:last-child{bottom:0}
+.film .lab-chap{z-index:4}
+.film .lab-dots{z-index:4}
+.film .lab-h{font-size:clamp(54px,6.8vw,116px)}
+.film-hint{position:absolute;z-index:4;left:50%;bottom:calc(5.5vh + 18px);transform:translateX(-50%);display:flex;align-items:center;gap:10px;opacity:.75;transition:opacity .6s}
+.film-hint i{width:1px;height:34px;background:linear-gradient(#fff,transparent);animation:drip 2s var(--ease) infinite}
+.film[data-started] .film-hint{opacity:0}
+@media (max-width:900px){
+  .letterbox i{height:3.5vh}
+  .film .lab-chap{top:calc(3.5vh + 70px)}
+  .film .lab-h{font-size:clamp(44px,12.5vw,72px)}
+  .film .lab-dots{gap:6px;bottom:calc(3.5vh + 14px)}
+  .film .lab-dots i{font-size:0;width:16px;height:3px;background:rgba(255,255,255,.35);border-radius:2px;transform:none!important}
+  .film .lab-dots i.on{background:var(--amarillo)}
+  .film .sign-badge{bottom:calc(3.5vh + 40px)}
+  .film-hint{bottom:calc(3.5vh + 46px);left:var(--pad);transform:none}
+}

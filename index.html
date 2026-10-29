@@ -13,8 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Outfit:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/seq/cine-granos/001.webp">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
@@ -43,7 +42,7 @@
 <header id="top">
   <a href="#hero" class="logo sign" aria-label="Valmass, inicio"><span class="wordmark">valmass</span><small>café de especialidad</small></a>
   <nav class="nav">
-    <a href="#lab">El café</a>
+    <a href="#film">El café</a>
     <a href="#cafes">Cafés</a>
     <a href="#tes">Tés</a>
     <a href="#carta">Carta</a>
@@ -57,7 +56,7 @@
   </div>
 </header>
 <div id="menu" aria-hidden="true">
-  <a href="#lab" data-i="0">El café</a>
+  <a href="#film" data-i="0">El café</a>
   <a href="#cafes" data-i="1">Cafés</a>
   <a href="#tes" data-i="2">Tés</a>
   <a href="#carta" data-i="3">Carta</a>
@@ -100,111 +99,57 @@
 </div>
 
 
-<!-- ============ CINE: videos de café manejados por el scroll ============ -->
-<section id="lab" class="pin lab" style="--h:640vh" data-chap="0">
+<!-- ============ LA PELÍCULA: 8 escenas 3D cinematográficas (film.js) ============ -->
+<section id="film" class="pin lab film" style="--h:1150vh">
   <div class="sticky">
     <canvas class="lab-canvas" aria-hidden="true"></canvas>
     <div class="lab-vignette"></div>
+    <div class="letterbox" aria-hidden="true"><i></i><i></i></div>
     <div class="lab-fade"></div>
     <div class="lab-chap">
       <p class="mono kicker"><b>01</b> — El grano</p>
       <h2 class="lab-h">Todo empieza<br><em>en el grano.</em></h2>
-      <p class="body">Café de especialidad, seleccionado y tostado para que cada taza tenga su carácter.</p>
+      <p class="body">Café de especialidad, seleccionado y tostado para que cada taza tenga carácter.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>02</b> — La gota</p>
-      <h2 class="lab-h">Oro en<br><em>cada gota.</em></h2>
-      <p class="body">El espresso cae del portafiltro denso, dorado y con su crema.</p>
+      <p class="mono kicker"><b>02</b> — La molienda</p>
+      <h2 class="lab-h">Molido al<br><em>momento.</em></h2>
+      <p class="body">El café cae fresco en el portafiltro y se tampea a mano, parejo, firme.</p>
     </div>
     <div class="lab-chap">
       <p class="mono kicker"><b>03</b> — La extracción</p>
-      <h2 class="lab-h">Hilo<br><em>a hilo.</em></h2>
-      <p class="body">Presión, temperatura y tiempo: la extracción llena el vaso de cuerpo y crema.</p>
+      <h2 class="lab-h">Oro en<br><em>cada gota.</em></h2>
+      <p class="body">Traba, presión y dos hilos dorados que llenan la taza amarilla de crema.</p>
     </div>
     <div class="lab-chap">
-      <p class="mono kicker"><b>04</b> — Con leche</p>
-      <h2 class="lab-h">Leche<br><em>y espresso.</em></h2>
-      <p class="body">Cuando la leche se encuentra con el café nacen el latte, el capuccino y el ICE latte.</p>
+      <p class="mono kicker"><b>04</b> — La gota</p>
+      <h2 class="lab-h">Una gota,<br><em>todo el sabor.</em></h2>
+      <p class="body">Densa, brillante, con aroma a cacao y caramelo. Así cae el espresso en cámara lenta.</p>
     </div>
-    <div class="lab-dots mono" aria-hidden="true"><i>El grano</i><i>La gota</i><i>Extracción</i><i>Con leche</i></div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>05</b> — Latte art</p>
+      <h2 class="lab-h">La firma<br><em>de la casa.</em></h2>
+      <p class="body">Leche sedosa sobre el espresso: base, hojas, corazón y un último trazo.</p>
+    </div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>06</b> — Filtrado</p>
+      <h2 class="lab-h">Gota<br><em>a gota.</em></h2>
+      <p class="body">Agua en espiral sobre el V60, la cama de café respira y el filtrado cae limpio.</p>
+    </div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>07</b> — Ice latte</p>
+      <h2 class="lab-h">Refrescate<br><em>en Valmass.</em></h2>
+      <p class="body">Hielo, leche fría y espresso en cascada, para los días de calor en Tucumán.</p>
+    </div>
+    <div class="lab-chap">
+      <p class="mono kicker"><b>08</b> — Valmass</p>
+      <h2 class="lab-h">Nos vemos<br><em>en Valmass.</em></h2>
+      <p class="body">Balcarce 510, San Miguel de Tucumán. Lunes a sábado de 7:30 a 13:00 y de 16:30 a 21:30.</p>
+    </div>
+    <div class="lab-dots mono" aria-hidden="true"><i>El grano</i><i>La molienda</i><i>La extracción</i><i>La gota</i><i>Latte art</i><i>Filtrado</i><i>Ice latte</i><i>Valmass</i></div>
     <div class="lab-bar"><i></i></div>
     <div class="sign sign-badge" aria-hidden="true"><span class="wordmark">valmass</span><small>café de especialidad</small></div>
-  </div>
-</section>
-
-<!-- ============ EN LA BARRA: videos reales ============ -->
-<div class="bar-intro"><p class="mono kicker"><b>En la barra</b> — Valmass de verdad</p><h2 class="display" data-split>Y así se ve</h2><h2 class="display it" data-split>en el local.</h2></div>
-<!-- ============ 01 EL ARTE (latte art) ============ -->
-<section id="arte" class="pin seq-section" style="--h:340vh" data-seq="latte" data-frames="79">
-  <div class="sticky">
-    <canvas class="seq-bg"></canvas>
-    <div class="seq-title big-title" aria-hidden="true"><span class="bt-a">Oro en</span><span class="bt-b">cada taza.</span></div>
-    <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
-    <div class="seq-copy left">
-      <p class="mono kicker"><b>En la barra</b> — El arte</p>
-      <h2 class="h2" data-split-words>Oro en cada taza.</h2>
-      <p class="body" data-split-words>Leche sedosa, pulso firme y una rosetta que ya es firma de la casa. Servida en la taza amarilla de siempre.</p>
-    </div>
-    <ol class="seq-steps mono">
-      <li data-at="0">La leche, sedosa</li>
-      <li data-at=".3">El vertido, a pulso</li>
-      <li data-at=".6">La rosetta</li>
-      <li data-at=".85">Tu taza, lista</li>
-    </ol>
-    <div class="seq-count mono"><span class="c-now">001</span> / <span>079</span></div>
-  </div>
-</section>
-
-<!-- ============ 02 LA EXTRACCIÓN ============ -->
-<section id="extraccion" class="pin seq-section dark" style="--h:340vh" data-seq="espresso" data-frames="90">
-  <div class="sticky">
-    <canvas class="seq-bg"></canvas>
-    <div class="seq-title big-title outline" aria-hidden="true"><span class="bt-a">La</span><span class="bt-b">extracción</span></div>
-    <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
-    <div class="seq-copy right">
-      <p class="mono kicker"><b>En la barra</b> — La extracción</p>
-      <h2 class="h2" data-split-words>Del molino a la taza.</h2>
-      <p class="body" data-split-words>Cada espresso pasa por las manos de nuestras baristas: molienda, distribución, tampeo y una extracción precisa.</p>
-    </div>
-    <div class="timeline mono">
-      <div class="tl-bar"><i></i></div>
-      <ul><li data-at="0">Molienda</li><li data-at=".33">Distribución</li><li data-at=".45">Tampeo</li><li data-at=".66">Extracción</li></ul>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============ 04 FILTRADO ============ -->
-<section id="filtrado" class="pin seq-section light" style="--h:360vh" data-seq="filtro" data-frames="104">
-  <div class="sticky">
-    <div class="drawing filtro-draw" data-svg="assets/svg/v60.svg" aria-hidden="true"></div>
-    <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
-    <div class="seq-copy left">
-      <p class="mono kicker"><b>En la barra</b> — Filtrado</p>
-      <h2 class="h2" data-split-words>También, filtrado.</h2>
-      <p class="body" data-split-words>Cada taza la preparan nuestras baristas, capacitadas y apasionadas por el café de especialidad, buscando una extracción precisa.</p>
-    </div>
-    <ol class="filter-steps">
-      <li data-at="0"><span class="mono">01</span>Molienda al filtro</li>
-      <li data-at=".22"><span class="mono">02</span>Agua en círculos</li>
-      <li data-at=".45"><span class="mono">03</span>La jarra</li>
-      <li data-at=".7"><span class="mono">04</span>A la copa</li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============ 05 ICE LATTE ============ -->
-<section id="ice" class="pin seq-section ice" style="--h:340vh" data-seq="ice" data-frames="86">
-  <div class="sticky">
-    <canvas class="seq-bg"></canvas>
-    <div class="seq-title big-title" aria-hidden="true"><span class="bt-a">Ice</span><span class="bt-b">latte.</span></div>
-    <div class="seq-frame"><canvas class="seq-canvas"></canvas><div class="frame-shine"></div></div>
-    <div class="seq-copy right">
-      <p class="mono kicker"><b>En la barra</b> — Refrescate</p>
-      <h2 class="h2" data-split-words>Capuccino ICE Latte.</h2>
-      <p class="body" data-split-words>Espresso, leche fría y hielo. El sabor del capuccino clásico para los días de calor en Tucumán.</p>
-    </div>
-    <div class="ice-flakes" aria-hidden="true"></div>
+    <div class="film-hint mono" aria-hidden="true"><span>Deslizá</span><i></i></div>
   </div>
 </section>
 
@@ -351,16 +296,6 @@
   </div>
 </section>
 
-<!-- ============ VIDEO QUE SE EXPANDE ============ -->
-<section id="video" class="pin vexp" style="--h:260vh">
-  <div class="sticky">
-    <div class="vexp-text" aria-hidden="true"><span>Las tardes</span><span class="it">en Valmass</span><span>son magia.</span></div>
-    <div class="vexp-box">
-      <video class="vexp-video" src="assets/video/tardes-valmass.mp4" poster="assets/video/tardes-valmass-poster.webp" muted loop playsinline preload="none"></video>
-    </div>
-  </div>
-</section>
-
 <!-- ============ VISITA ============ -->
 <section id="visita" class="visit">
   <div class="visit-grid">
@@ -397,9 +332,10 @@
   </div>
 </footer>
 
-<script src="data.js?v=3"></script>
-<script src="script.js?v=3"></script>
+<script src="data.js?v=4"></script>
+<script src="script.js?v=4"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
-<script type="module" src="beans.js?v=3"></script>
+<script type="module" src="beans.js?v=4"></script>
+<script type="module" src="film.js?v=4"></script>
 </body>
 </html>
